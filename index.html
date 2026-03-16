@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIFEX TECHNOLOGIES LLC</title>
+    <meta name="description" content="LIFEX TECHNOLOGIES LLC — Building intelligent tools for better living. Home of CarboAI, your smart carb cycling companion.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --text: #e8e8ec;
+            --text-muted: #8888a0;
+            --accent-1: #00c896;
+            --accent-2: #00b4d8;
+            --gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Animated background grid ── */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridShift 20s linear infinite;
+        }
+
+        @keyframes gridShift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        /* ── Gradient glow orbs ── */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glow-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-1);
+            top: -100px;
+            left: -100px;
+            animation: orbFloat1 15s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-2);
+            bottom: -50px;
+            right: -50px;
+            animation: orbFloat2 18s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(80px, 60px); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-60px, -80px); }
+        }
+
+        /* ── Main content ── */
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 6vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-tagline {
+            margin-top: 20px;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Product card ── */
+        .product-section {
+            display: flex;
+            justify-content: center;
+            padding: 40px 24px 100px;
+            width: 100%;
+        }
+
+        .product-card {
+            position: relative;
+            max-width: 560px;
+            width: 100%;
+            padding: 48px 40px;
+            border-radius: 20px;
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* Gradient border glow */
+        .product-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 21px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0,200,150,0.3), rgba(0,180,216,0.1), transparent, transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .product-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(0,200,150,0.15), rgba(0,180,216,0.15));
+            color: var(--accent-1);
+            border: 1px solid rgba(0,200,150,0.2);
+            margin-bottom: 24px;
+        }
+
+        .product-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-2);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .product-desc {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 12px;
+            background: var(--gradient);
+            color: #0a0a0f;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 200, 150, 0.3);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .cta-arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .cta-button:hover .cta-arrow {
+            transform: translateX(4px);
+        }
+
+        /* ── Footer ── */
+        footer {
+            width: 100%;
+            margin-top: auto;
+            padding: 0 24px;
+        }
+
+        .footer-line {
+            height: 1px;
+            background: var(--gradient);
+            opacity: 0.2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 32px 0 40px;
+            text-align: center;
+        }
+
+        .footer-email a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-email a:hover {
+            color: var(--accent-1);
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: rgba(136, 136, 160, 0.5);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 80px 20px 60px;
+            }
+
+            .product-card {
+                padding: 32px 24px;
+            }
+
+            .product-name {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background effects -->
+    <div class="bg-grid"></div>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
+    <div class="content">
+        <!-- Hero -->
+        <section class="hero">
+            <h1 class="hero-title">LIFEX TECHNOLOGIES</h1>
+            <p class="hero-tagline">Building intelligent tools for better living.</p>
+        </section>
+
+        <!-- Product -->
+        <section class="product-section">
+            <div class="product-card">
+                <span class="product-badge">Our Product</span>
+                <h2 class="product-name">CarboAI</h2>
+                <p class="product-subtitle">Your Smart Carb Cycling Companion</p>
+                <p class="product-desc">
+                    AI-powered nutrition tracking and personalized carb cycling plans
+                    for optimal performance and health.
+                </p>
+                <a href="https://carboai.app/" class="cta-button" target="_blank" rel="noopener">
+                    Launch CarboAI
+                    <span class="cta-arrow">&rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <div class="footer-email">
+                    <a href="mailto:support@lifextechnologies.com">support@lifextechnologies.com</a>
+                </div>
+                <p class="footer-copy">&copy; 2026 LIFEX TECHNOLOGIES LLC. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
